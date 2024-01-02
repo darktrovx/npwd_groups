@@ -54,28 +54,11 @@ export function App(props: AppProps) {
   });
 
   useNuiEvent('GROUPS', 'updateTask', (data: any) => {
-    setTask(data.task);
+    setTask({ step: data.step, steps: data.steps });
   });
 
   const updateGroupState = (state: boolean) => {
     setInGroupState(state);
-
-    const tempTask = [];
-    tempTask.push({Title: 'Task 1', Description: 'This is the first taskddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'});
-    tempTask.push({Title: 'Task 2', Description: 'This is the second task'});
-    tempTask.push({Title: 'Task 3', Description: 'This is the third task'});
-    tempTask.push({Title: 'Task 4', Description: 'This is the fourth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
-  
-    setTask({ step: 2, steps: tempTask})
   }
 
   const updateMenuState = (state: string) => {
