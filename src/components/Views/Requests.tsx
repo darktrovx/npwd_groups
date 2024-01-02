@@ -1,54 +1,59 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../../style.css'
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import fetchNui from '../../utils/fetchNui';
-import { ServerPromiseResp } from '../../types/common';
+import { Request, ServerPromiseResp } from '../../types/common';
 
 const Requests = () => {
-    let pendingRequests: { id: number; name: string; }[] = [];
+    const [pendingRequests, setPendingRequests] = useState([] as Request[]);
 
     const GetRequests = async () => {
         console.log('Getting requests');
-        const data:any = await fetchNui<ServerPromiseResp>('GetRequests');
-        pendingRequests = data.requests;
+        const requests:any = await fetchNui<ServerPromiseResp>('GetRequests');
+        console.log('REQUESTS: ', JSON.stringify(requests))
+        setPendingRequests(requests);
     }
-    GetRequests();
 
-    const Deny = async (id: number) => {
-        const success = await fetchNui<ServerPromiseResp>('KickMember', {id: id});
+    const Deny = async (index: number, id: number) => {
+        const success = await fetchNui<ServerPromiseResp>('KickMember', {id: (index + 1)});
         if (success)
         {
-            const element = document.getElementById('requestID:'+id);
+            const element = document.getElementById('requestID:'+index);
             element?.remove();
             pendingRequests.splice(pendingRequests.findIndex(request => request.id === id), 1);
         }
     }
 
-    const Accept = async (id: number) => {
-        const success = await fetchNui<ServerPromiseResp>('AcceptRequest', {id: id});
+    const Accept = async (index: number, id: number) => {
+        const success = await fetchNui<ServerPromiseResp>('AcceptRequest', {id: (index + 1)});
         if (success)
         {
             pendingRequests.splice(pendingRequests.findIndex(request => request.id === id), 1);
-            const element = document.getElementById('requestID:'+id);
+            const element = document.getElementById('requestID:'+index);
             element?.remove();
         }
     }
 
-    let listItems = [] as any;
-    listItems = pendingRequests.map(request => {
-        console.log(request.id);
-        return <div key={request.id} id={'requestID:' + request.id} className='request-list-item'>
+    useEffect(() => {
+        GetRequests();
+    }, []);
+
+    const LoadRequests = () => {
+        const listItems = pendingRequests.map((request, index) => {
+        return <div key={index} id={'requestID:' + index} className='request-list-item'>
                     <div className='request-name'>{request.name}</div>
                     <div className='request-btns'>
-                        <div className='request-deny' onClick={() => Deny(request.id)}><DisabledByDefaultIcon/></div>
-                        <div className='request-accept' onClick={() => Accept(request.id)}><CheckBoxIcon/></div>
+                        <div className='request-deny' onClick={() => Deny(index, request.id)}><DisabledByDefaultIcon/></div>
+                        <div className='request-accept' onClick={() => Accept(index, request.id)}><CheckBoxIcon/></div>
                     </div>
                 </div>
-    });
+        });
+        return listItems;
+    };
 
-    return <div className='request-list'>{listItems}</div>
+    return <div className='request-list'>{LoadRequests()}</div>
 };
 
 export default Requests;

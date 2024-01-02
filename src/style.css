@@ -13,8 +13,8 @@
 .group-item {
     display: flex;
     flex-direction: row;
-    min-width: 37vw;
-    max-width: 37vw;
+    min-width: 25vw;
+    max-width: 25vw;
     padding: 1vh;
     background: rgb(181,63,251);
     background: radial-gradient(circle, rgba(181,63,251,1) 0%, rgba(252,70,107,0) 100%);
@@ -90,7 +90,7 @@
     font-size: 1.5rem;
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 23vw;
     margin-bottom: 2vh;
 }
 
@@ -100,9 +100,8 @@
 
 .members-btns {
     float: right;
-    right: 0;
     position: absolute;
-    /* margin-right: 3vh; */
+    margin-right: 2vh;
 }
 
 .members-btns:hover {

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Typography } from '@mui/material';
 import styled from '@emotion/styled';
 
@@ -9,17 +9,18 @@ const Container = styled.div<{ backgroundColor: string }>`
   min-height: ${HEADER_HEIGHT};
   padding-left: 1.5rem;
   background-color: rgb(33,37,41);
+  color: white;
 `;
 
 interface HeaderProps {
-  children: ReactNode;
+  menuName: string
 }
 
-const Header = ({ children }: HeaderProps) => {
+const Header = ({ menuName }: HeaderProps) => {
   return (
     <Container backgroundColor={'rgb(33,37,41)'}>
       <Typography variant="h5" color="white">
-        {children}
+        {menuName}
       </Typography>
     </Container>
   );

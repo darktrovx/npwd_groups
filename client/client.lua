@@ -2,12 +2,36 @@
 
 -- EVENTS
 RegisterNetEvent("groups:SendTaskUpdate", function(steps, step)
-    exports.npwd:sendUIMessage({ type = "updateTask", payload = { steps = steps, step = step }})
+    exports.npwd:sendUIMessage({ app = "npwd_groups", method = "updateTask", data = { steps = steps, step = step} })
+end)
+
+RegisterNetEvent("groups:GroupJoinEvent", function()
+    print('GROUP JOINED')
+    exports.npwd:sendUIMessage({ app = "npwd_groups", method = "groupJoined", data = { something = false } })
+end)
+
+RegisterNetEvent("groups:GroupMembersUpdate", function(members)
+    print('GROUP MEMBERS UPDATE')
+    exports.npwd:sendUIMessage({ app = "npwd_groups", method = "updateMembers", data = { members = members } })
 end)
 
 -- NUI CALLBACKS
+
+RegisterNUICallback('RequestAppData', function(_, cb)
+    local appData = {}
+
+    if exports['devyn-groups']:GetGroupID() then
+        appData.inGroup = true
+    else
+        appData.inGroup = false
+    end
+
+    appData.task = exports['devyn-groups']:GetTaskData()
+    cb(appData)
+end)
+
 RegisterNUICallback('CreateGroup', function(_, cb)
-    local success = exports['devyn-groups']:RequestCreateGroup()
+    local success = exports['devyn-groups']:CreateGroup()
     cb(success)
 end)
 
@@ -21,8 +45,8 @@ RegisterNUICallback("RequestGroups", function(_, cb)
     cb(groups)
 end)
 
-RegisterNUICallback('RequestJoin', function(_, cb)
-    local success = exports['devyn-groups']:RequestJoin()
+RegisterNUICallback('RequestJoin', function(data, cb)
+    local success = exports['devyn-groups']:RequestJoin(data.id)
     cb(success)
 end)
 
@@ -41,7 +65,7 @@ RegisterNUICallback("DenyRequest", function(data, cb)
     cb(success)
 end)
 
-RegisterNUICallback("GetMembers", function(_, cb)
+RegisterNUICallback("RequestMembers", function(_, cb)
     local members = exports['devyn-groups']:GetMembers()
     cb(members)
 end)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { i18n } from 'i18next';
 import {
@@ -14,6 +14,8 @@ import { useNuiEvent } from './hooks/useNuiEvent';
 import { RecoilRoot } from 'recoil';
 import HeaderBtns from './components/Views/HeaderBtns';
 import PageHandler from './components/PageHandler';
+import { ServerPromiseResp } from './types/common';
+import fetchNui from './utils/fetchNui';
 
 const Container = styled(Paper)`
   flex: 1;
@@ -46,32 +48,39 @@ export function App(props: AppProps) {
 
   const [inGroup, setInGroupState] = useState(false);
   const [menuState, setMenuState] = useState('GROUPS');
-  const [members, setMembers] = useState([] as any);
   const [task, setTask] = useState({} as { step: number, steps: any[] });
 
-  useNuiEvent('GROUPS', 'updateMembers', (data: any) => {
-    setMembers(data.members);
-  });
-
-  useNuiEvent('GROUPS', 'updateTask', (data: any) => {
+  useNuiEvent('npwd_groups', 'updateTask', (data: any) => {
     setTask({ step: data.step, steps: data.steps });
   });
 
-  const updateGroupState = (state: boolean) => {
-    setInGroupState(state);
-  }
+  useNuiEvent('npwd_groups', 'groupJoined', (data: any) => {
+    console.log('GroupJoined Event Triggered')
+    setMenuState('MEMBERS');
+    setInGroupState(true);
+  });
 
-  const updateMenuState = (state: string) => {
-    setMenuState(state);
-  }
+  const RequestAppData = async () => {
+    const groupAppData: any = await fetchNui<ServerPromiseResp>('RequestAppData');
+    setInGroupState(groupAppData.inGroup);
+    setTask(groupAppData.task);
+
+    if (groupAppData.inGroup) {
+      setMenuState('MEMBERS');
+    }
+  };
+
+  useEffect(() => {
+    RequestAppData();
+  }, []);
   
   return (
     <StyledEngineProvider injectFirst>
       <Container square elevation={0}>
-        <Header>Groups</Header>
+        <Header menuName={menuState} />
         <Content>
-          <HeaderBtns inGroup={inGroup} updateInGroup={updateGroupState} updateMenu={updateMenuState}/>
-          <PageHandler menu={menuState} inGroup={inGroup} members={members} task={task} />
+          <HeaderBtns inGroup={inGroup} updateInGroup={setInGroupState} updateMenu={setMenuState}/>
+          <PageHandler menu={menuState} inGroup={inGroup} task={task} />
         </Content>
       </Container>
     </StyledEngineProvider>

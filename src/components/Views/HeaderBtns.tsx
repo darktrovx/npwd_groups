@@ -6,6 +6,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { ServerPromiseResp } from '../../types/common';
+import fetchNui from '../../utils/fetchNui';
 
 const GroupBtns = styled.div `
   display: flex;
@@ -25,8 +27,7 @@ interface HeaderBtnsProps {
 const HeaderBtns = (props: HeaderBtnsProps) => {
 
   const CreateBtnClick = async () => {
-    //const success = await fetchNui<ServerPromiseResp>('CreateGroup');
-    const success = true;
+    const success = await fetchNui<ServerPromiseResp>('CreateGroup');
     if (success) {
       props.updateInGroup(true);
       props.updateMenu('MEMBERS');
@@ -34,8 +35,7 @@ const HeaderBtns = (props: HeaderBtnsProps) => {
   };
   
   const LeaveBtnClick = async () => {
-    //const success = await fetchNui<ServerPromiseResp>('LeaveGroup');
-    const success = true;
+    const success = await fetchNui<ServerPromiseResp>('LeaveGroup');
     if (success) {
       props.updateInGroup(false);   
       props.updateMenu('GROUPS');
