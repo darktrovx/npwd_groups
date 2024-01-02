@@ -10,10 +10,10 @@ import {
 import Header, { HEADER_HEIGHT } from './components/Header';
 import styled from '@emotion/styled';
 import '../src/style.css'
-import { NuiProvider, useNuiEvent } from 'fivem-nui-react-lib';
+import { useNuiEvent } from './hooks/useNuiEvent';
 import { RecoilRoot } from 'recoil';
 import HeaderBtns from './components/Views/HeaderBtns';
-import Groups from './components/Views/Groups';
+import PageHandler from './components/PageHandler';
 
 const Container = styled(Paper)`
   flex: 1;
@@ -43,17 +43,30 @@ interface AppProps {
 }
 
 export function App(props: AppProps) {
-  const [menuState, setMenuState] = useState('NONE');
-  useNuiEvent('GROUPS', 'Create', () => setMenuState('NONE'));
-  
 
+  const [inGroup, setInGroupState] = useState(false);
+  const [menuState, setMenuState] = useState('GROUPS');
+  const [members, setMembers] = useState([] as any);
+
+  useNuiEvent('GROUPS', 'updateMembers', (data: any) => {
+    setMembers(data.members);
+  });
+
+  const updateGroupState = (state: boolean) => {
+    setInGroupState(state);
+  }
+
+  const updateMenuState = (state: string) => {
+    setMenuState(state);
+  }
+  
   return (
     <StyledEngineProvider injectFirst>
       <Container square elevation={0}>
-        <Header>Groups</Header>
+        <Header>Groups TEST</Header>
         <Content>
-          <HeaderBtns />
-          <div className='available-groups'><Groups/></div>
+          <HeaderBtns inGroup={inGroup} updateInGroup={updateGroupState} updateMenu={updateMenuState}/>
+          <PageHandler menu={menuState} inGroup={inGroup} members={members} />
         </Content>
       </Container>
     </StyledEngineProvider>
@@ -62,10 +75,8 @@ export function App(props: AppProps) {
 
 export default function WithProviders(props: AppProps) {
   return (
-    <RecoilRoot override key="groups">
-      <NuiProvider resource="npwd_groups">
-        <App {...props} />
-      </NuiProvider>
+    <RecoilRoot override key="npwd_groups">
+      <App {...props} />
     </RecoilRoot>
   );
 }

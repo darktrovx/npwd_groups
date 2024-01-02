@@ -53,12 +53,90 @@
     cursor: pointer;
 }
 
-.groupbtn:hover {
+.membersbtn:hover {
     color: purple;
     cursor: pointer;
 }
 
 .requestbtn:hover {
     color: rgb(220, 245, 0);
+    cursor: pointer;
+}
+
+
+/* GROUP MEMBERS */
+.members-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 5vh;
+}
+
+.members-list-item {
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 2vh;
+}
+
+.members-name {
+    float: left;
+}
+
+.members-btns {
+    float: right;
+    right: 0;
+    position: absolute;
+    /* margin-right: 3vh; */
+}
+
+.members-btns:hover {
+    color: red;
+    cursor: pointer;
+}
+
+
+/* GROUP REQUESTS */
+
+.request-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 5vh;
+}
+
+.request-list-item {
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 2vh;
+}
+
+.request-name {
+    float: left;
+}
+
+.request-btns {
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-right: 3vh;
+    column-gap: 2vw;
+}
+
+.request-deny:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.request-accept:hover {
+    color: green;
     cursor: pointer;
 }

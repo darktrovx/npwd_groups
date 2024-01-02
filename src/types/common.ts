@@ -8,3 +8,17 @@ export interface Group<T = undefined> {
 	name: string;
 	members: [];
 }
+
+export interface GroupMember {
+	name: string;
+	id: number;
+	isOwner: boolean;
+}
+
+export interface Request {
+	id: number;
+	name: string;
+}
+
+export interface Tasks {
+}

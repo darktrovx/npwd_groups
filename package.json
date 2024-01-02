@@ -29,14 +29,11 @@
     "dev": "vite --mode dev",
     "dev:browser": "concurrently \"build:watch --mode dev\" \"preview:dev\"",
     "build:dev": "vite build --mode dev",
-    "build:watch": "vitre build --watch",
+    "build:watch": "vite build --watch",
     "build:game": "vite build --mode game",
     "preview:dev": "vite preview --mode dev",
     "clean": "rm -rf dist",
-    "watch": "concurrently \"yarn watch:client\" \"yarn watch:server\"  \"yarn watch:nui\"",
-    "watch:nui": "esbuild src/index.tsx --outdir=dist/html --watch --target=es6 --bundle --loader:.png=dataurl",
-    "watch:client": "esbuild client/client.ts --bundle --watch --outfile=dist/client.js",
-    "watch:server": "esbuild server/server.ts --bundle --sourcemap --platform=node --watch --outfile=dist/server.js"
+    "watch:nui": "esbuild src/index.tsx --outdir=dist/html --watch --target=es6 --bundle --loader:.png=dataurl"
   },
   "dependencies": {
     "esbuild": "^0.19.5",

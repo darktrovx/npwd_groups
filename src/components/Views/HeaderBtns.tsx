@@ -1,5 +1,4 @@
-import React, { ReactNode, useState } from 'react';
-import { Typography, Box, useTheme } from '@mui/material';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 import '../../style.css'
@@ -11,7 +10,6 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import fetchNui from '../../utils/fetchNui';
 import { ServerPromiseResp } from '../../types/common';
-import { useNuiEvent } from 'fivem-nui-react-lib';
 
 const GroupBtns = styled.div `
   display: flex;
@@ -22,36 +20,43 @@ const GroupBtns = styled.div `
   color: white;
 `;
 
-const HeaderBtns = () => {
-  const [inGroup, setInGroupState] = useState(false);
+interface HeaderBtnsProps {
+  inGroup: boolean;
+  updateInGroup: (state: boolean) => void;
+  updateMenu: (state: string) => void;
+}
+
+const HeaderBtns = (props: HeaderBtnsProps) => {
 
   const CreateBtnClick = async () => {
     //const success = await fetchNui<ServerPromiseResp>('CreateGroup');
     const success = true;
-  
     if (success) {
-      setInGroupState(true);
-    } else {
-      setInGroupState(false);
+      props.updateInGroup(true);
+      props.updateMenu('MEMBERS');
     }
-    console.log(inGroup);
   };
   
   const LeaveBtnClick = async () => {
-    //const data = await fetchNui<ServerPromiseResp>('LeaveGroup');
+    //const success = await fetchNui<ServerPromiseResp>('LeaveGroup');
     const success = true;
     if (success) {
-      setInGroupState(false);    
+      props.updateInGroup(false);   
+      props.updateMenu('GROUPS');
     }
   }
+
+  const GroupBtnClick = (menu: string) => {
+    props.updateMenu(menu);
+  }
   
-  if (inGroup) {
+  if (props.inGroup) {
     return (
       <GroupBtns>
         <LogoutIcon className='leavebtn' onClick={LeaveBtnClick}/>
-        <FormatListBulletedIcon className='taskbtn' />
-        <GroupsIcon className='groupbtn' />
-        <PersonAddAlt1Icon className='requestbtn' />
+        <FormatListBulletedIcon className='taskbtn' onClick={ () => GroupBtnClick('TASKS')} />
+        <GroupsIcon className='membersbtn' onClick={() => GroupBtnClick('MEMBERS')} />
+        <PersonAddAlt1Icon className='requestbtn' onClick={() => GroupBtnClick('REQUESTS')} />
       </GroupBtns>
     );
   } else {

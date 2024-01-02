@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Typography, Box, useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import styled from '@emotion/styled';
 
 export const HEADER_HEIGHT = '4rem';
