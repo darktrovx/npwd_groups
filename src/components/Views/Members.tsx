@@ -17,24 +17,27 @@ const Members = (props: Props) => {
         setMembers(members);
     }
 
-    const Kick = async (id: number) => {
+    const Kick = async (id: number, index: number) => {
         const success = await fetchNui<ServerPromiseResp>('KickMember', {id: id});
-        if (success)
+        if (success) {
             members.splice(members.findIndex((member: any) => member.id === id), 1);
+            const element = document.getElementById('requestID:'+index);
+            element?.remove();
+        }
     }
 
     const LoadMembers = () => {
         const listItems = members.map((member: any, index: number) => {
             if (!props.isOwner || index == 0)
-                return (<div className='members-list-item'>
+                return (<div className='members-list-item' id={'memberitemID:' + index}>
                             <div className='members-name'>{member.name}</div>
                             <div className='members-btns'></div>
                         </div>);
             else
                 return (
-                    <div className='members-list-item'>
+                    <div className='members-list-item' id={'memberitemID:' + index}>
                         <div className='members-name'>{member.name}</div>
-                        <div className='members-btns' onClick={() => Kick(member.id)}><PersonRemoveIcon /></div>
+                        <div className='members-btns' onClick={() => Kick(member.id, index)}><PersonRemoveIcon /></div>
                     </div>);
         })
         return listItems;

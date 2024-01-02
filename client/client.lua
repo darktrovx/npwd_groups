@@ -6,12 +6,10 @@ RegisterNetEvent("groups:SendTaskUpdate", function(steps, step)
 end)
 
 RegisterNetEvent("groups:GroupJoinEvent", function()
-    print('GROUP JOINED')
     exports.npwd:sendUIMessage({ app = "npwd_groups", method = "groupJoined", data = { something = false } })
 end)
 
 RegisterNetEvent("groups:GroupMembersUpdate", function(members)
-    print('GROUP MEMBERS UPDATE')
     exports.npwd:sendUIMessage({ app = "npwd_groups", method = "updateMembers", data = { members = members } })
 end)
 

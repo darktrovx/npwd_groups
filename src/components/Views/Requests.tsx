@@ -10,9 +10,7 @@ const Requests = () => {
     const [pendingRequests, setPendingRequests] = useState([] as Request[]);
 
     const GetRequests = async () => {
-        console.log('Getting requests');
         const requests:any = await fetchNui<ServerPromiseResp>('GetRequests');
-        console.log('REQUESTS: ', JSON.stringify(requests))
         setPendingRequests(requests);
     }
 
@@ -30,9 +28,9 @@ const Requests = () => {
         const success = await fetchNui<ServerPromiseResp>('AcceptRequest', {id: (index + 1)});
         if (success)
         {
-            pendingRequests.splice(pendingRequests.findIndex(request => request.id === id), 1);
             const element = document.getElementById('requestID:'+index);
             element?.remove();
+            pendingRequests.splice(pendingRequests.findIndex(request => request.id === id), 1);
         }
     }
 

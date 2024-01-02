@@ -19,9 +19,7 @@ const GroupsList = (props: Props) => {
     const [groups, setGroups] = useState([] as any);
 
     const RequestJoin = async (id: number) => {
-        console.log(id)
         const data:any = await fetchNui<ServerPromiseResp>('RequestJoin', {id: id});
-        console.log('Request Join', JSON.stringify(data));
     }
 
     const RequestGroups = async () => {

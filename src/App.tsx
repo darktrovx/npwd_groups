@@ -4,7 +4,6 @@ import { i18n } from 'i18next';
 import {
   Theme,
   Paper,
-  Typography,
   StyledEngineProvider,
 } from '@mui/material';
 import Header, { HEADER_HEIGHT } from './components/Header';
@@ -56,7 +55,6 @@ export function App(props: AppProps) {
   });
 
   useNuiEvent('npwd_groups', 'groupJoined', (data: any) => {
-    console.log('GroupJoined Event Triggered')
     setMenuState('MEMBERS');
     setInGroupState(true);
   });
