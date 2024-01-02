@@ -5,7 +5,11 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import fetchNui from '../../utils/fetchNui';
 import { ServerPromiseResp } from '../../types/common';
 
-const Members = () => {
+interface Props {
+    isOwner: boolean;
+}
+
+const Members = (props: Props) => {
     const [members, setMembers] = useState([] as any);
 
     const RequestMembers = async () => {
@@ -21,7 +25,7 @@ const Members = () => {
 
     const LoadMembers = () => {
         const listItems = members.map((member: any, index: number) => {
-            if (!member.owner || index == 0)
+            if (!props.isOwner || index == 0)
                 return (<div className='members-list-item'>
                             <div className='members-name'>{member.name}</div>
                             <div className='members-btns'></div>

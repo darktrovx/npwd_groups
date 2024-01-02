@@ -47,6 +47,7 @@ interface AppProps {
 export function App(props: AppProps) {
 
   const [inGroup, setInGroupState] = useState(false);
+  const [isOwner, setIsOwnerState] = useState(false);
   const [menuState, setMenuState] = useState('GROUPS');
   const [task, setTask] = useState({} as { step: number, steps: any[] });
 
@@ -63,6 +64,7 @@ export function App(props: AppProps) {
   const RequestAppData = async () => {
     const groupAppData: any = await fetchNui<ServerPromiseResp>('RequestAppData');
     setInGroupState(groupAppData.inGroup);
+    setIsOwnerState(groupAppData.isOwner);
     setTask(groupAppData.task);
 
     if (groupAppData.inGroup) {
@@ -79,8 +81,8 @@ export function App(props: AppProps) {
       <Container square elevation={0}>
         <Header menuName={menuState} />
         <Content>
-          <HeaderBtns inGroup={inGroup} updateInGroup={setInGroupState} updateMenu={setMenuState}/>
-          <PageHandler menu={menuState} inGroup={inGroup} task={task} />
+          <HeaderBtns isOwner={isOwner} inGroup={inGroup} updateInGroup={setInGroupState} updateMenu={setMenuState} updateOwner={setIsOwnerState} />
+          <PageHandler menu={menuState} inGroup={inGroup} isOwner={isOwner} task={task} />
         </Content>
       </Container>
     </StyledEngineProvider>

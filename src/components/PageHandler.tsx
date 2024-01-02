@@ -8,6 +8,7 @@ import Task from './Views/Task';
 interface Props {
     menu: String;
     inGroup: boolean;
+    isOwner: boolean;
     task: { step: number, steps: any[] };
 }
 
@@ -27,7 +28,7 @@ const PageHandler = (props: Props) => {
         case 'MEMBERS':
             return (
                 <div className='group-members'>
-                    <Members />
+                    <Members isOwner={props.isOwner} />
                 </div>
             );
         case 'TASKS':

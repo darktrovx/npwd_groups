@@ -20,8 +20,10 @@ const GroupBtns = styled.div `
 
 interface HeaderBtnsProps {
   inGroup: boolean;
+  isOwner: boolean;
   updateInGroup: (state: boolean) => void;
   updateMenu: (state: string) => void;
+  updateOwner: (state: boolean) => void;
 }
 
 const HeaderBtns = (props: HeaderBtnsProps) => {
@@ -31,6 +33,7 @@ const HeaderBtns = (props: HeaderBtnsProps) => {
     if (success) {
       props.updateInGroup(true);
       props.updateMenu('MEMBERS');
+      props.updateOwner(true);
     }
   };
   
@@ -52,7 +55,7 @@ const HeaderBtns = (props: HeaderBtnsProps) => {
         <LogoutIcon className='leavebtn' onClick={LeaveBtnClick}/>
         <FormatListBulletedIcon className='taskbtn' onClick={ () => GroupBtnClick('TASKS')} />
         <GroupsIcon className='membersbtn' onClick={() => GroupBtnClick('MEMBERS')} />
-        <PersonAddAlt1Icon className='requestbtn' onClick={() => GroupBtnClick('REQUESTS')} />
+        { props.isOwner ? <PersonAddAlt1Icon className='requestbtn' onClick={() => GroupBtnClick('REQUESTS')} /> : null }
       </GroupBtns>
     );
   } else {

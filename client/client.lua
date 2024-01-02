@@ -26,6 +26,8 @@ RegisterNUICallback('RequestAppData', function(_, cb)
         appData.inGroup = false
     end
 
+    appData.owner = LocalPlayer.state.owner or false
+
     appData.task = exports['devyn-groups']:GetTaskData()
     cb(appData)
 end)
