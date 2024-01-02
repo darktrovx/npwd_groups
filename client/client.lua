@@ -1,6 +1,9 @@
 
 
 -- EVENTS
+RegisterNetEvent("groups:SendTaskUpdate", function(steps, step)
+    exports.npwd:sendUIMessage({ type = "updateTask", payload = { steps = steps, step = step }})
+end)
 
 -- NUI CALLBACKS
 RegisterNUICallback('CreateGroup', function(_, cb)

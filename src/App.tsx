@@ -47,13 +47,35 @@ export function App(props: AppProps) {
   const [inGroup, setInGroupState] = useState(false);
   const [menuState, setMenuState] = useState('GROUPS');
   const [members, setMembers] = useState([] as any);
+  const [task, setTask] = useState({} as { step: number, steps: any[] });
 
   useNuiEvent('GROUPS', 'updateMembers', (data: any) => {
     setMembers(data.members);
   });
 
+  useNuiEvent('GROUPS', 'updateTask', (data: any) => {
+    setTask(data.task);
+  });
+
   const updateGroupState = (state: boolean) => {
     setInGroupState(state);
+
+    const tempTask = [];
+    tempTask.push({Title: 'Task 1', Description: 'This is the first taskddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'});
+    tempTask.push({Title: 'Task 2', Description: 'This is the second task'});
+    tempTask.push({Title: 'Task 3', Description: 'This is the third task'});
+    tempTask.push({Title: 'Task 4', Description: 'This is the fourth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+    tempTask.push({Title: 'Task 5', Description: 'This is the fifth task'});
+  
+    setTask({ step: 2, steps: tempTask})
   }
 
   const updateMenuState = (state: string) => {
@@ -66,7 +88,7 @@ export function App(props: AppProps) {
         <Header>Groups TEST</Header>
         <Content>
           <HeaderBtns inGroup={inGroup} updateInGroup={updateGroupState} updateMenu={updateMenuState}/>
-          <PageHandler menu={menuState} inGroup={inGroup} members={members} />
+          <PageHandler menu={menuState} inGroup={inGroup} members={members} task={task} />
         </Content>
       </Container>
     </StyledEngineProvider>

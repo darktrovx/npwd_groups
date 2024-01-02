@@ -20,5 +20,7 @@ export interface Request {
 	name: string;
 }
 
-export interface Tasks {
+export interface Task {
+	step: number;
+	steps: object[];
 }

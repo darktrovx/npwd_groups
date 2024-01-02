@@ -3,11 +3,13 @@ import Groups from './Views/Groups';
 import '../style.css'
 import Members from './Views/Members';
 import Requests from './Views/Requests';
+import Task from './Views/Task';
 
 interface Props {
     menu: String;
     inGroup: boolean;
     members: [];
+    task: { step: number, steps: any[] };
 }
 
 const PageHandler = (props: Props) => {
@@ -31,16 +33,14 @@ const PageHandler = (props: Props) => {
             );
         case 'TASKS':
             return (
-                <div>
-                    <h1>Tasks</h1>
+                <div className='group-task'>
+                    <Task step={props.task.step} steps={props.task.steps}/>
                 </div>
             );
         case 'REQUESTS':
             return (
-                <div>
-                    <div className='group-requests'>
+                <div className='group-requests'>
                     <Requests />
-                </div>
                 </div>
             );
         default:

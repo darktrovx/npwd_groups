@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-
 import '../../style.css'
-
 import AddIcon from '@mui/icons-material/Add';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import fetchNui from '../../utils/fetchNui';
-import { ServerPromiseResp } from '../../types/common';
 
 const GroupBtns = styled.div `
   display: flex;
