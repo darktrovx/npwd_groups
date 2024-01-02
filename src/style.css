@@ -10,6 +10,18 @@
     width: 100%;
 }
 
+.group-item {
+    display: flex;
+    flex-direction: row;
+    min-width: 37vw;
+    max-width: 37vw;
+    padding: 1vh;
+    background: rgb(181,63,251);
+    background: radial-gradient(circle, rgba(181,63,251,1) 0%, rgba(252,70,107,0) 100%);
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+}
+
 .group-name {
     margin-left: 3vh;
     width: 70%;

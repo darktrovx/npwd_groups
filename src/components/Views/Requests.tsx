@@ -16,10 +16,6 @@ const Requests = () => {
     }
     GetRequests();
 
-    // pendingRequests.push({id: 1, name: 'Test1'});
-    // pendingRequests.push({id: 2, name: 'Test2'});
-    // pendingRequests.push({id: 3, name: 'Test3'});
-
     const Deny = async (id: number) => {
         const success = await fetchNui<ServerPromiseResp>('KickMember', {id: id});
         if (success)

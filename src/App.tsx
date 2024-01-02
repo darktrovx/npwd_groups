@@ -68,7 +68,7 @@ export function App(props: AppProps) {
   return (
     <StyledEngineProvider injectFirst>
       <Container square elevation={0}>
-        <Header>Groups TEST</Header>
+        <Header>Groups</Header>
         <Content>
           <HeaderBtns inGroup={inGroup} updateInGroup={updateGroupState} updateMenu={updateMenuState}/>
           <PageHandler menu={menuState} inGroup={inGroup} members={members} task={task} />

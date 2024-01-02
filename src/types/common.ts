@@ -5,8 +5,9 @@ export interface ServerPromiseResp<T = undefined> {
 }
 
 export interface Group<T = undefined> {
+	id: number;
 	name: string;
-	members: [];
+	members: number;
 }
 
 export interface GroupMember {
