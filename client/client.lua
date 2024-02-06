@@ -18,7 +18,7 @@ end)
 RegisterNUICallback('RequestAppData', function(_, cb)
     local appData = {}
 
-    if exports['devyn-groups']:GetGroupID() then
+    if exports['groups']:GetGroupID() then
         appData.inGroup = true
     else
         appData.inGroup = false
@@ -26,51 +26,51 @@ RegisterNUICallback('RequestAppData', function(_, cb)
 
     appData.owner = LocalPlayer.state.owner or false
 
-    appData.task = exports['devyn-groups']:GetTaskData()
+    appData.task = exports['groups']:GetTaskData()
     cb(appData)
 end)
 
 RegisterNUICallback('CreateGroup', function(_, cb)
-    local success = exports['devyn-groups']:CreateGroup()
+    local success = exports['groups']:CreateGroup()
     cb(success)
 end)
 
 RegisterNUICallback('LeaveGroup', function(_, cb)
-    local success = exports['devyn-groups']:LeaveGroup()
+    local success = exports['groups']:LeaveGroup()
     cb(success)
 end)
 
 RegisterNUICallback("RequestGroups", function(_, cb)
-    local groups = exports['devyn-groups']:RequestGroupsList()
+    local groups = exports['groups']:RequestGroupsList()
     cb(groups)
 end)
 
 RegisterNUICallback('RequestJoin', function(data, cb)
-    local success = exports['devyn-groups']:RequestJoin(data.id)
+    local success = exports['groups']:RequestJoin(data.id)
     cb(success)
 end)
 
 RegisterNUICallback("GetRequests", function(_, cb)
-    local requests = exports['devyn-groups']:GetRequests()
+    local requests = exports['groups']:GetRequests()
     cb(requests)
 end)
 
 RegisterNUICallback("AcceptRequest", function(data, cb)
-    local success = exports['devyn-groups']:AcceptRequest(data.id)
+    local success = exports['groups']:AcceptRequest(data.id)
     cb(success)
 end)
 
 RegisterNUICallback("DenyRequest", function(data, cb)
-    local success = exports['devyn-groups']:DenyRequest(data.id)
+    local success = exports['groups']:DenyRequest(data.id)
     cb(success)
 end)
 
 RegisterNUICallback("RequestMembers", function(_, cb)
-    local members = exports['devyn-groups']:GetMembers()
+    local members = exports['groups']:GetMembers()
     cb(members)
 end)
 
 RegisterNUICallback("KickMember", function(data, cb)
-    local success = exports['devyn-groups']:KickMember(data.id)
+    local success = exports['groups']:KickMember(data.id)
     cb(success)
 end)
