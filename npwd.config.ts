@@ -14,4 +14,5 @@ export default (settings: Settings) => ({
   backgroundColor: '#333',
   icon: AppIcon,
   app: App,
+  notificationIcon: AppIcon,
 });
