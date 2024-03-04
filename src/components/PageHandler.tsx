@@ -23,7 +23,9 @@ const PageHandler = (props: Props) => {
             );
         case 'GROUPS':
             return (
-                <div className='available-groups'><Groups inGroup={props.inGroup}/></div>
+                <div className='available-groups'>
+                    <Groups inGroup={props.inGroup}/>
+                </div>
             );
         case 'MEMBERS':
             return (

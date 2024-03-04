@@ -59,6 +59,18 @@ export function App(props: AppProps) {
     setInGroupState(true);
   });
 
+  useNuiEvent('npwd_groups', 'groupDeleted', (data: any) => {
+    setMenuState('GROUPS');
+    setInGroupState(false);
+    setIsOwnerState(false);
+  });
+
+  useNuiEvent('npwd_groups', 'leftGroup', (data: any) => {
+    setMenuState('GROUPS');
+    setInGroupState(false);
+    setIsOwnerState(false);
+  });
+
   const RequestAppData = async () => {
     const groupAppData: any = await fetchNui<ServerPromiseResp>('RequestAppData');
     setInGroupState(groupAppData.inGroup);

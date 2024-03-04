@@ -15,22 +15,20 @@ const Requests = () => {
     }
 
     const Deny = async (index: number, id: number) => {
-        const success = await fetchNui<ServerPromiseResp>('KickMember', {id: (index + 1)});
+        const success = await fetchNui<ServerPromiseResp>('KickMember', { id: (index + 1) });
         if (success)
         {
-            const element = document.getElementById('requestID:'+index);
-            element?.remove();
-            pendingRequests.splice(pendingRequests.findIndex(request => request.id === id), 1);
+            const newRequests = pendingRequests.filter(request => request.id !== id);
+            setPendingRequests(newRequests);
         }
     }
 
     const Accept = async (index: number, id: number) => {
-        const success = await fetchNui<ServerPromiseResp>('AcceptRequest', {id: (index + 1)});
+        const success = await fetchNui<ServerPromiseResp>('AcceptRequest', { id: (index + 1) });
         if (success)
         {
-            const element = document.getElementById('requestID:'+index);
-            element?.remove();
-            pendingRequests.splice(pendingRequests.findIndex(request => request.id === id), 1);
+            const newRequests = pendingRequests.filter(request => request.id !== id);
+            setPendingRequests(newRequests);
         }
     }
 

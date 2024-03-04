@@ -20,9 +20,8 @@ const Members = (props: Props) => {
     const Kick = async (id: number, index: number) => {
         const success = await fetchNui<ServerPromiseResp>('KickMember', {id: id});
         if (success) {
-            members.splice(members.findIndex((member: any) => member.id === id), 1);
-            const element = document.getElementById('requestID:'+index);
-            element?.remove();
+            const newMembers = members.filter((member: any) => member.id !== id);
+            setMembers(newMembers);
         }
     }
 
@@ -37,7 +36,7 @@ const Members = (props: Props) => {
                 return (
                     <div className='members-list-item' id={'memberitemID:' + index}>
                         <div className='members-name'>{member.name}</div>
-                        <div className='members-btns' onClick={() => Kick(member.id, index)}><PersonRemoveIcon /></div>
+                        <div className='members-btns' onClick={() => Kick(member.id, index)}><PersonRemoveIcon fontSize='large' /></div>
                     </div>);
         })
         return listItems;

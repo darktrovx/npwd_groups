@@ -5,34 +5,37 @@
 
 .available-groups {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    justify-content: flex-start;     
+    gap: 5px;
+    min-width: 90%;
+    margin-top: 20px;
 }
 
 .group-item {
+    color: white;
+    font-size: 1.5rem;
     display: flex;
     flex-direction: row;
-    min-width: 25vw;
-    max-width: 25vw;
-    padding: 1vh;
-    background: rgb(181,63,251);
-    background: radial-gradient(circle, rgba(181,63,251,1) 0%, rgba(252,70,107,0) 100%);
-    margin-top: 0.5vh;
-    margin-bottom: 0.5vh;
+    min-width: 360px;
+
+    background: rgb(247, 186, 44);
+    background: linear-gradient(90deg, rgba(247, 186, 44, 1) 0%, rgba(0 ,0, 0, 0) 100%);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .group-name {
-    margin-left: 3vh;
-    width: 70%;
+    margin-top: 5px;
+    margin-left: 15px;
+    flex-grow: 1;
 }
 
 .group-details {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 1vh;
-    column-gap: 2vh;
+    justify-content: space-evenly;
+    gap: 30px;
+    margin-bottom: 10px;
+    margin-right: 20px;
 }
 
 .group-count {
@@ -83,26 +86,31 @@
     align-items: center;
     width: 90%;
     margin-top: 5vh;
+
 }
 
 .members-list-item {
     color: white;
     font-size: 1.5rem;
+
     display: flex;
-    flex-direction: row;
+    justify-content: flex-start;     
+    gap: 30px;
     width: 100%;
-    margin-bottom: 2vh;
+    margin-bottom: 20px;
 }
 
 .members-name {
-    float: left;
+    flex-grow: 1;
     margin-left: 5px;
 }
 
 .members-btns {
-    float: right;
-    position: absolute;
-    margin-right: 2vh;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    margin-bottom: 10px;
+    margin-right: 20px;
 }
 
 .members-btns:hover {
